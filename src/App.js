@@ -1,24 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
+import SingleNote from './Components/SingleNote';
+import QuieFactory from './Core/QuizFactory';
 import './App.css';
 
 function App() {
+  const qf = new QuieFactory();
+  const quizArr = qf.generateQuiz(10);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {quizArr.map((item, index) => <SingleNote key={index} index={index} quiz={item}></SingleNote>)}
     </div>
   );
 }
