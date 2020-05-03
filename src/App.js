@@ -1,17 +1,36 @@
-import React from 'react';
-import SingleNote from './Components/SingleNote';
-import QuieFactory from './Core/QuizFactory';
+import React, { Component } from 'react'
+import SingleQuiz from './Components/SingleQuiz';
+import Exam from './Core/Exam';
 import './App.css';
 
-function App() {
-  const qf = new QuieFactory();
-  const quizArr = qf.generateQuiz(10);
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      totalScore: 0
+    }
+    this.exam = new Exam('Emma Chen', 5);
+  }
 
-  return (
-    <div className="App">
-      {quizArr.map((item, index) => <SingleNote key={index} index={index} quiz={item}></SingleNote>)}
+  onSubmit = () => {
+    this.setState({
+      totalScore: this.exam.getTotalScore()
+    })
+  }
+  
+  render() {
+    return (
+      <div className="App">
+      <button 
+        type="button" 
+        id="btn"
+        onClick={this.onSubmit}>
+          Submit
+      </button>
+      <div>{this.state.totalScore}</div>
+      {this.exam.Quizs.map((item, index) => <SingleQuiz key={index} quiz={item}></SingleQuiz>)}
     </div>
-  );
+    )
+  }
 }
 
-export default App;

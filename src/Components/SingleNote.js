@@ -4,8 +4,12 @@ import MusicNoteFacotry from '../Core/MusicNoteFactory';
 export default class SingleNote extends Component {
   constructor(props){
     super(props);
-    this.elementId = `svg_${props.index}`;
+    const index = props.index 
+      ? props.index 
+      : (+ new Date()) + (Math.random() + '').substring(2, 5);
+    this.elementId = `svg_${index}`;
   }
+
   componentDidMount() {
     const mnf = new MusicNoteFacotry(this.elementId)
     mnf.generateSingleNote(this.props.quiz);
@@ -13,7 +17,7 @@ export default class SingleNote extends Component {
     
   render() {
     return (
-    <div className="music-render" id={this.elementId}></div>
+      <div className="music-render" id={this.elementId}></div>
     )
   }
 }

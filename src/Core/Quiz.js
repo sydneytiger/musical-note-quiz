@@ -3,11 +3,12 @@ export default class Quiz {
     this.clef = clef;
     this.pitch = pitch;
     this.rhythm = rhythm;
-    this.rhythmTime = this.getRyhthmTime(rhythm);
+    this.rhythmTime = this._getRyhthmTime(rhythm);
+    this.answer = null;
   }
     
-   getRyhthmTime(rhythm) {
-      switch(rhythm) {
+  _getRyhthmTime(rhythm) {
+    switch(rhythm) {
       case '/q':
         return '1/4';
       case '/8':
@@ -18,8 +19,20 @@ export default class Quiz {
         return '1/8'
     }
   }
-  
-  getAnswer(){
+
+  getScore() {
+    return this.answer === this.pitch ? 1 : 0;
+  }
+
+  isCorrect() {
+    return this.answer === this.pitch;
+  }
+
+  setUserAnswer(ans) {
+    this.answer = ans;
+  }
+
+  getCorrectAnswer(){
     return this.pitch;
   }
 }
